@@ -245,7 +245,24 @@ pre {
 	text-shadow:	0 0 3px black;
 }
 
+#wrapper {
+	position: absolute;
+	top:	0;
+	left:	0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
 
+#upload > div {
+	position: absolute;
+	top:	0;
+	left:	0;
+}
+
+menu > button {
+	width: none;
+}
 
 
 

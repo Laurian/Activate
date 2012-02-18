@@ -13,6 +13,7 @@
 	<script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
 	<script type="text/javascript" charset="utf-8" src="jquery-1.7.1.js"></script>
 	<script type="text/javascript" charset="utf-8" src="jquery.animate-enhanced.min.js"></script>
+	<script src="jquery.kinetic.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
 	// If you want to prevent dragging, uncomment this section
 	/*
@@ -110,6 +111,9 @@
 	         
 			 context.fillStyle = "red";
 	         context.fillText(document.getElementById('geolocation').innerHTML, 10, 10);
+	
+			 $('#finalImage').attr("src", canvas[0].toDataURL("image/png"));
+			 canvas.remove();
                      
 	     };
 	     // Show the captured photo
@@ -196,16 +200,23 @@
 	 //   This method accepts a `Position` object, which contains
 	 //   the current GPS coordinates
 	 //
+	/*
+	 form11.deglat.value = ((Math.floor(latAbs / 1000000) * signlat) + '° ' + Math.floor(  ((latAbs/1000000) - Math.floor(latAbs/1000000)) * 60)  + '\' ' +  ( Math.floor(((((latAbs/1000000) - Math.floor(latAbs/1000000)) * 60) - Math.floor(((latAbs/1000000) - Math.floor(latAbs/1000000)) * 60)) * 100000) *60/100000 ) + '"'  );
+	form11.deglon.value = ((Math.floor(lonAbs / 1000000) * signlon) + '° ' + Math.floor(  ((lonAbs/1000000) - Math.floor(lonAbs/1000000)) * 60)  + '\' ' +  ( Math.floor(((((lonAbs/1000000) - Math.floor(lonAbs/1000000)) * 60) - Math.floor(((lonAbs/1000000) - Math.floor(lonAbs/1000000)) * 60)) * 100000) *60/100000 ) + '"'  );
+	*/
 	 var geoSuccess = function(position) {
 	     var element = document.getElementById('geolocation');
+		 // var signlat = 1, signlon = 1;
+		 // 	     var lat = ((Math.floor(position.coords.latitude / 1000000) * signlat) + '° ' + Math.floor(  ((position.coords.latitude/1000000) - Math.floor(position.coords.latitude/1000000)) * 60)  + '\' ' +  ( Math.floor(((((position.coords.latitude/1000000) - Math.floor(position.coords.latitude/1000000)) * 60) - Math.floor(((position.coords.latitude/1000000) - Math.floor(position.coords.latitude/1000000)) * 60)) * 100000) *60/100000 ) + '"'  );
+		 // 		var lng =  ((Math.floor(position.coords.longitude / 1000000) * signlon) + '° ' + Math.floor(  ((position.coords.longitude/1000000) - Math.floor(position.coords.longitude/1000000)) * 60)  + '\' ' +  ( Math.floor(((((position.coords.longitude/1000000) - Math.floor(position.coords.longitude/1000000)) * 60) - Math.floor(((position.coords.longitude/1000000) - Math.floor(position.coords.longitude/1000000)) * 60)) * 100000) *60/100000 ) + '"'  );
 	     element.innerHTML = 'Lat: '          + position.coords.latitude          +
 	                      '\nLong: '         + position.coords.longitude         +
-	                      '\n± '          + position.coords.accuracy          + '\n' +
-	                      'Altitude: '          + position.coords.altitude           +
-	                      ' ± ' + position.coords.altitudeAccuracy  + '\n' +
+	                      // '\n± '          + position.coords.accuracy          + '\n' +
+	                      '\nAltitude: '          + position.coords.altitude       + '\n'    +
+	                      // ' ± ' + position.coords.altitudeAccuracy  + '\n' +
 	                      // 'Heading: '           + position.coords.heading           + '\n' +
 	                      // 'Speed: '             + position.coords.speed             + '\n' +
-	                      'Timestamp:\n'         + new Date(position.timestamp);
+	                      /*'Timestamp:\n'         +*/ new Date(position.timestamp);
 	 };
  
 	 // onError Callback receives a PositionError object
@@ -254,9 +265,10 @@
 	
 	function doUpload() {
 		$('#view').slideUp();
-		
+		$('#wrapper').kinetic();
 		$('#upload').slideDown();
 	}
+	
   	</script>
   </head>
   <body onload="onBodyLoad()">
@@ -280,14 +292,32 @@
 
         <!-- <div id="heading">Waiting for heading...</div> -->
         <pre id="geolocation" style="position: absolute; top: 0; left: 0;">Watching geolocation...</pre>
+		<img src="image/activate_compass.png" style="width: 20%; position: absolute; top: 10px; right: 10px">
 		
-		<menu style="position: absolute; bottom: 0; left: 0; width: 100%; margin: 0; padding: 0">
-			<button onclick="$('#capture').slideDown();$('#view').slideUp();" style="margin-bottom: 10px">« Cancel</button>
+		<menu style="position: absolute; bottom: 0; left: 0; width: 100%; margin: 0; padding: 0; text-align: center">
 			<button onclick="doUpload();">UPLOAD</button>
+			
+			<select>
+				<option>sizes</option>
+				<option>foo</option>
+				<option>bar</option>				
+			</select>
+			
+			File size: 5MB <br>
+			Estimated upload time: 12 minutes
+
+			<button onclick="$('#capture').slideDown();$('#view').slideUp();" style="margin-bottom: 10px">NEW</button>
+
+			<img src="image/activate_nav_photo.png" style="width: 100%; margin-top: 10px">
 		</menu>
     </section>
 	<section id="upload" style="display: none; position: relative; width: 100%; height: 100%">
-		
+		<div id="wrapper">
+            <div id="inner">
+                <img src="" id="finalImage" />
+            </div>
+        </div>
+		<div><img src="image/loader.gif"></div>
 	</section>
   </body>
 </html>
