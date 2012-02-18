@@ -295,18 +295,21 @@
 		<img src="image/activate_compass.png" style="width: 20%; position: absolute; top: 10px; right: 10px">
 		
 		<menu style="position: absolute; bottom: 0; left: 0; width: 100%; margin: 0; padding: 0; text-align: center">
-			<button onclick="doUpload();">UPLOAD</button>
-			
-			<select>
-				<option>sizes</option>
-				<option>foo</option>
-				<option>bar</option>				
-			</select>
 			
 			File size: 5MB <br>
 			Estimated upload time: 12 minutes
+			
+			<button onclick="doUpload();">UPLOAD</button>
+			
+			<!-- <select>
+							<option>sizes</option>
+							<option>foo</option>
+							<option>bar</option>				
+						</select> -->			
+			
+			
 
-			<button onclick="$('#capture').slideDown();$('#view').slideUp();" style="margin-bottom: 10px">NEW</button>
+			<img width="102" onclick="$('#capture').slideDown();$('#view').slideUp();" style="margin-bottom: 0px" src="image/activate_nav_new.png">
 
 			<img src="image/activate_nav_photo.png" style="width: 100%; margin-top: 10px">
 		</menu>
@@ -317,7 +320,16 @@
                 <img src="" id="finalImage" />
             </div>
         </div>
-		<div><img src="image/loader.gif"></div>
+		<div style="text-align: center;width: 100%; position: absolute; top:0; left:0">
+			<h1>Uploading</h1>
+			<img src="image/loader.gif" style="margin:auto">
+		</div>
+		<menu style="position: absolute; bottom: 0; left: 0; width: 100%; margin: 0; padding: 0; text-align: center">
+			<button>Describe</button>
+			<img width="102" onclick="$('#capture').slideDown();$('#upload').slideUp();" style="margin-bottom: 0px" src="image/activate_nav_new.png">
+
+			<img src="image/activate_nav_photo.png" style="width: 100%; margin-top: 10px">
+		</menu>
 	</section>
   </body>
 </html>
