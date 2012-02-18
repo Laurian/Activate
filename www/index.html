@@ -82,17 +82,20 @@
 	     // Get image handle
 	     //
 	     var largeImage = document.getElementById('largeImage');
-     
+
+     	
+		 $('#capture').hide();
+		 $('#view').show();		
 	     // Unhide image elements
 	     //
-	     largeImage.style.display = 'hidden';
+	     largeImage.style.display = 'block';
      
 
 	     largeImage.onload = function(){
-	           var canvas = document.getElementById("canvas");
-	           var context = canvas.getContext("2d");
-	           context.drawImage(largeImage, 0, 0, 500, 500);
-	//                      context.fillText("test", 10, 10);
+	         var canvas = document.getElementById("canvas");
+	         var context = canvas.getContext("2d");
+	         context.drawImage(largeImage, 0, 0, 500, 500);
+	
 	         context.fillStyle = "red";
 	         context.fillText(document.getElementById('geolocation').innerHTML, 10, 10);
                      
@@ -133,7 +136,48 @@
 	     alert('Failed because: ' + message);
 	 }
  
- 
+ 	// Called when capture operation is finished
+    //
+    function captureSuccess(mediaFiles) {
+        var i, len;
+        for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+            uploadFile(mediaFiles[i]);
+        }       
+    }
+
+    // Called if something bad happens.
+    // 
+    function captureError(error) {
+        var msg = 'An error occurred during capture: ' + error.code;
+        navigator.notification.alert(msg, null, 'Uh oh!');
+    }
+
+    // A button will call this function
+    //
+    function captureVideo() {
+        // Launch device video recording application, 
+        // allowing user to capture up to 2 video clips
+        navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 2});
+    }
+
+    // Upload files to server
+    function uploadFile(mediaFile) {
+        // var ft = new FileTransfer(),
+        //             path = mediaFile.fullPath,
+        //             name = mediaFile.name;
+        // 
+        //         ft.upload(path,
+        //             "http://my.domain.com/upload.php",
+        //             function(result) {
+        //                 console.log('Upload success: ' + result.responseCode);
+        //                 console.log(result.bytesSent + ' bytes sent');
+        //             },
+        //             function(error) {
+        //                 console.log('Error uploading file ' + path + ': ' + error.code);
+        //             },
+        //             { fileName: name });   
+    }
+	
  
 	 ///
 	 // onSuccess Callback
@@ -159,7 +203,7 @@
 	           'message: ' + error.message + '\n');
 	 }
  
-	 // var geoWatch = navigator.geolocation.watchPosition(geoSuccess, geoError, { frequency: 3000 });
+	 var geoWatch = navigator.geolocation.watchPosition(geoSuccess, geoError, { frequency: 3000 });
  
 	 function headingSuccess(heading) {
 	     //console.log(heading);
@@ -174,26 +218,32 @@
  
 	 // var headingWatch = navigator.compass.watchHeading(headingSuccess, headingError, { frequency: 3000 });
             
-            </script>
+  	</script>
   </head>
   <body onload="onBodyLoad()">
-	<section>
-		<header style="align: center; margin-bottom:	20%">
+	<section id="capture">
+		<header style="align: center; margin-bottom:	10%">
 			<img src="image/amnesty_logo.png" style="width: 100%">
-			<img src="image/activate_logo.png" style="display: block; width: 80%; margin-top: 20%; margin-left: auto; margin-right: auto">
+			<img src="image/activate_logo.png" style="display: block; width: 80%; margin-top: 10%; margin-left: auto; margin-right: auto">
 		</header>
-        <!-- <div id="heading">Waiting for heading...</div> -->
-        <!-- <pre id="geolocation">Watching geolocation...</pre> -->
         
         <button onclick="capturePhoto();">Capture Photo</button> <br>
         <!-- <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br> -->
         <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
         <!-- <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br> -->
-
+		<button onclick="captureVideo();">Capture Video</button>
+	</section>
+	<section id="view" style="display: hidden">
         <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
-        <img style="display:none;" id="largeImage" src="" />
-        <canvas id="canvas" width="500" height="500"></canvas>
-        
+        <img style="display:none;width: 100%" id="largeImage" src="" />
+
+        <!-- <div id="heading">Waiting for heading...</div> -->
+        <pre id="geolocation">Watching geolocation...</pre>
+		<button>UPLOAD</button>
     </section>
+	<section id="upload" style="display: hidden">
+        <canvas id="canvas" width="500" height="500"></canvas>
+		???
+	</section>
   </body>
 </html>
