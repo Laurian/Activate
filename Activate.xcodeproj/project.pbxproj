@@ -39,6 +39,7 @@
 		108A3ABA14EFE0F9004CE7FD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 108A3AB914EFE0F9004CE7FD /* Default@2x.png */; };
 		108A3ABC14EFE155004CE7FD /* iCandle_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 108A3ABB14EFE155004CE7FD /* iCandle_114.png */; };
 		108A3AC014EFE1C3004CE7FD /* iCandle_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 108A3ABF14EFE1C3004CE7FD /* iCandle_57.png */; };
+		108A3AC114EFE7B0004CE7FD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 108A3ABD14EFE19B004CE7FD /* Default.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -317,6 +318,7 @@
 				108A3ABA14EFE0F9004CE7FD /* Default@2x.png in Resources */,
 				108A3ABC14EFE155004CE7FD /* iCandle_114.png in Resources */,
 				108A3AC014EFE1C3004CE7FD /* iCandle_57.png in Resources */,
+				108A3AC114EFE7B0004CE7FD /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

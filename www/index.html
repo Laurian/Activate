@@ -159,7 +159,7 @@
 	           'message: ' + error.message + '\n');
 	 }
  
-	 var geoWatch = navigator.geolocation.watchPosition(geoSuccess, geoError, { frequency: 3000 });
+	 // var geoWatch = navigator.geolocation.watchPosition(geoSuccess, geoError, { frequency: 3000 });
  
 	 function headingSuccess(heading) {
 	     //console.log(heading);
@@ -178,17 +178,20 @@
   </head>
   <body onload="onBodyLoad()">
 	<section>
+		<header style="align: center; margin-bottom:	20%">
+			<img src="image/amnesty_logo.png" style="width: 100%">
+			<img src="image/activate_logo.png" style="display: block; width: 80%; margin-top: 20%; margin-left: auto; margin-right: auto">
+		</header>
         <!-- <div id="heading">Waiting for heading...</div> -->
-        <pre id="geolocation">Watching geolocation...</pre>
+        <!-- <pre id="geolocation">Watching geolocation...</pre> -->
         
         <button onclick="capturePhoto();">Capture Photo</button> <br>
-        <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
+        <!-- <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br> -->
         <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
-        <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
+        <!-- <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br> -->
+
         <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
         <img style="display:none;" id="largeImage" src="" />
-        
-        canvas: 
         <canvas id="canvas" width="500" height="500"></canvas>
         
     </section>
