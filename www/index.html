@@ -2,20 +2,17 @@
 <html>
   <head>
   <title>Activate</title>
-  
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
 	<meta charset="utf-8">
-
-
 	<!-- iPad/iPhone specific css below, add after your main css >
 	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
 	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
 	-->
+	<link rel="stylesheet" href="style/style.css">
 	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
 	<script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
+	<script type="text/javascript" charset="utf-8" src="jquery-1.7.1.min.js"></script>
     <script type="text/javascript">
-
-
 	// If you want to prevent dragging, uncomment this section
 	/*
 	function preventBehavior(e) 
@@ -47,157 +44,141 @@
 	function onDeviceReady()
 	{
 		// do your thing!
-		navigator.notification.alert("PhoneGap is working")
+		// navigator.notification.alert("PhoneGap is working")
+		pictureSource=navigator.camera.PictureSourceType;
+     	destinationType=navigator.camera.DestinationType;
 	}
-    
-    </script>
+                
+	 var pictureSource;   // picture source
+	 var destinationType; // sets the format of returned value 
   
-        <script type="text/javascript" charset="utf-8">
-            
-            var pictureSource;   // picture source
-            var destinationType; // sets the format of returned value 
-            
-            // Wait for PhoneGap to connect with the device
-            //
-            document.addEventListener("deviceready",onDeviceReady,false);
-            
-            // PhoneGap is ready to be used!
-            //
-            function onDeviceReady() {
-                pictureSource=navigator.camera.PictureSourceType;
-                destinationType=navigator.camera.DestinationType;
-            }
-            
-            // Called when a photo is successfully retrieved
-            //
-            function onPhotoDataSuccess(imageData) {
-                // Uncomment to view the base64 encoded image data
-                // console.log(imageData);
-                
-                // Get image handle
-                //
-                var smallImage = document.getElementById('smallImage');
-                
-                // Unhide image elements
-                //
-                smallImage.style.display = 'hidden';
-                
-                // Show the captured photo
-                // The inline CSS rules are used to resize the image
-                //
-                smallImage.src = /*"data:image/jpeg;base64," + */ imageData;
-                onPhotoURISuccess(imageData);
-            }
-            
-            // Called when a photo is successfully retrieved
-            //
-            function onPhotoURISuccess(imageURI) {
-                // Uncomment to view the image file URI 
-                console.log(imageURI);
-                
-                // Get image handle
-                //
-                var largeImage = document.getElementById('largeImage');
-                
-                // Unhide image elements
-                //
-                largeImage.style.display = 'hidden';
-                
+	 // Called when a photo is successfully retrieved
+	 //
+	 function onPhotoDataSuccess(imageData) {
+	     // Uncomment to view the base64 encoded image data
+	     // console.log(imageData);
+     
+	     // Get image handle
+	     //
+	     var smallImage = document.getElementById('smallImage');
+     
+	     // Unhide image elements
+	     //
+	     smallImage.style.display = 'hidden';
+     
+	     // Show the captured photo
+	     // The inline CSS rules are used to resize the image
+	     //
+	     smallImage.src = /*"data:image/jpeg;base64," + */ imageData;
+	     onPhotoURISuccess(imageData);
+	 }
+ 
+	 // Called when a photo is successfully retrieved
+	 //
+	 function onPhotoURISuccess(imageURI) {
+	     // Uncomment to view the image file URI 
+	     console.log(imageURI);
+     
+	     // Get image handle
+	     //
+	     var largeImage = document.getElementById('largeImage');
+     
+	     // Unhide image elements
+	     //
+	     largeImage.style.display = 'hidden';
+     
 
-                largeImage.onload = function(){
-                      var canvas = document.getElementById("canvas");
-                      var context = canvas.getContext("2d");
-                      context.drawImage(largeImage, 0, 0, 500, 500);
-//                      context.fillText("test", 10, 10);
-                    context.fillStyle = "red";
-                    context.fillText(document.getElementById('geolocation').innerHTML, 10, 10);
-                                
-                };
-                // Show the captured photo
-                // The inline CSS rules are used to resize the image
-                //
-                largeImage.src = imageURI;
-                
-            }
-            
-            // A button will call this function
-            //
-            function capturePhoto() {
-                // Take picture using device camera and retrieve image as base64-encoded string
-                navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
-            }
-            
-            // A button will call this function
-            //
-            function capturePhotoEdit() {
-                // Take picture using device camera, allow edit, and retrieve image as base64-encoded string  
-                navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true }); 
-            }
-            
-            // A button will call this function
-            //
-            function getPhoto(source) {
-                // Retrieve image file location from specified source
-                navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
-                                            destinationType: destinationType.FILE_URI,
-                                            sourceType: source });
-            }
-            
-            // Called if something bad happens.
-            // 
-            function onFail(message) {
-                alert('Failed because: ' + message);
-            }
-            
-            
-            
-            ///
-            // onSuccess Callback
-            //   This method accepts a `Position` object, which contains
-            //   the current GPS coordinates
-            //
-            var GonSuccess = function(position) {
-                var element = document.getElementById('geolocation');
-                element.innerHTML = 'Latitude: '          + position.coords.latitude          + '\n' +
-                                 'Longitude: '         + position.coords.longitude         + '\n' +
-                                 'Altitude: '          + position.coords.altitude          + '\n' +
-                                 'Accuracy: '          + position.coords.accuracy          + '\n' +
-                                 'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-                                 'Heading: '           + position.coords.heading           + '\n' +
-                                 'Speed: '             + position.coords.speed             + '\n' +
-                                 'Timestamp: '         + new Date(position.timestamp)      + '\n';
-            };
-            
-            // onError Callback receives a PositionError object
-            //
-            function GonError(error) {
-                alert('code: '    + error.code    + '\n' +
-                      'message: ' + error.message + '\n');
-            }
-            
-//            navigator.geolocation.getCurrentPosition(GonSuccess, GonError);
-            var watchID = navigator.geolocation.watchPosition(GonSuccess, GonError, { frequency: 3000 });
-            ///
-
-            
-            function ConSuccess(heading) {
-                //console.log(heading);
-                var element = document.getElementById('heading');
-                element.innerHTML = 'Heading: ' + heading.magneticHeading;
-            };
-            
-            function ConError(compassError) {
-                alert('Compass error: ' + compassError.code);
-            };
-            
-            
-            var watchID2 = navigator.compass.watchHeading(ConSuccess, ConError, { frequency: 3000 });
+	     largeImage.onload = function(){
+	           var canvas = document.getElementById("canvas");
+	           var context = canvas.getContext("2d");
+	           context.drawImage(largeImage, 0, 0, 500, 500);
+	//                      context.fillText("test", 10, 10);
+	         context.fillStyle = "red";
+	         context.fillText(document.getElementById('geolocation').innerHTML, 10, 10);
+                     
+	     };
+	     // Show the captured photo
+	     // The inline CSS rules are used to resize the image
+	     //
+	     largeImage.src = imageURI;
+     
+	 }
+ 
+	 // A button will call this function
+	 //
+	 function capturePhoto() {
+	     // Take picture using device camera and retrieve image as base64-encoded string
+	     navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+	 }
+ 
+	 // A button will call this function
+	 //
+	 function capturePhotoEdit() {
+	     // Take picture using device camera, allow edit, and retrieve image as base64-encoded string  
+	     navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true }); 
+	 }
+ 
+	 // A button will call this function
+	 //
+	 function getPhoto(source) {
+	     // Retrieve image file location from specified source
+	     navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
+	                                 destinationType: destinationType.FILE_URI,
+	                                 sourceType: source });
+	 }
+ 
+	 // Called if something bad happens.
+	 // 
+	 function onFail(message) {
+	     alert('Failed because: ' + message);
+	 }
+ 
+ 
+ 
+	 ///
+	 // onSuccess Callback
+	 //   This method accepts a `Position` object, which contains
+	 //   the current GPS coordinates
+	 //
+	 var geoSuccess = function(position) {
+	     var element = document.getElementById('geolocation');
+	     element.innerHTML = 'Latitude: '          + position.coords.latitude          + '\n' +
+	                      'Longitude: '         + position.coords.longitude         + '\n' +
+	                      'Altitude: '          + position.coords.altitude          + '\n' +
+	                      'Accuracy: '          + position.coords.accuracy          + '\n' +
+	                      'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+	                      'Heading: '           + position.coords.heading           + '\n' +
+	                      'Speed: '             + position.coords.speed             + '\n' +
+	                      'Timestamp: '         + new Date(position.timestamp)      + '\n';
+	 };
+ 
+	 // onError Callback receives a PositionError object
+	 //
+	 function geoError(error) {
+	     alert('code: '    + error.code    + '\n' +
+	           'message: ' + error.message + '\n');
+	 }
+ 
+	 var geoWatch = navigator.geolocation.watchPosition(geoSuccess, geoError, { frequency: 3000 });
+ 
+	 function headingSuccess(heading) {
+	     //console.log(heading);
+	     var element = document.getElementById('heading');
+	     element.innerHTML = 'Heading: ' + heading.magneticHeading;
+	 };
+ 
+	 function headingError(compassError) {
+	     alert('Compass error: ' + compassError.code);
+	 };
+ 
+ 
+	 // var headingWatch = navigator.compass.watchHeading(headingSuccess, headingError, { frequency: 3000 });
             
             </script>
   </head>
   <body onload="onBodyLoad()">
 	<section>
-        <div id="heading">Waiting for heading...</div>
+        <!-- <div id="heading">Waiting for heading...</div> -->
         <pre id="geolocation">Watching geolocation...</pre>
         
         <button onclick="capturePhoto();">Capture Photo</button> <br>
