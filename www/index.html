@@ -80,7 +80,7 @@
                 
                 // Unhide image elements
                 //
-                smallImage.style.display = 'block';
+                smallImage.style.display = 'hidden';
                 
                 // Show the captured photo
                 // The inline CSS rules are used to resize the image
@@ -101,7 +101,7 @@
                 
                 // Unhide image elements
                 //
-                largeImage.style.display = 'block';
+                largeImage.style.display = 'hidden';
                 
 
                 largeImage.onload = function(){
@@ -109,33 +109,8 @@
                       var context = canvas.getContext("2d");
                       context.drawImage(largeImage, 0, 0, 500, 500);
 //                      context.fillText("test", 10, 10);
-                    
-                    ///
-                    // onSuccess Callback
-                    //   This method accepts a `Position` object, which contains
-                    //   the current GPS coordinates
-                    //
-                    var GonSuccess = function(position) {
-                        context.fillStyle = "red";
-                        context.fillText('Latitude: '          + position.coords.latitude          + '\n' +
-                              'Longitude: '         + position.coords.longitude         + '\n' +
-                              'Altitude: '          + position.coords.altitude          + '\n' +
-                              'Accuracy: '          + position.coords.accuracy          + '\n' +
-                              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-                              'Heading: '           + position.coords.heading           + '\n' +
-                              'Speed: '             + position.coords.speed             + '\n' +
-                              'Timestamp: '         + new Date(position.timestamp)      + '\n', 10, 10);
-                    };
-                    
-                    // onError Callback receives a PositionError object
-                    //
-                    function GonError(error) {
-                        alert('code: '    + error.code    + '\n' +
-                              'message: ' + error.message + '\n');
-                    }
-                    
-                    navigator.geolocation.getCurrentPosition(GonSuccess, GonError);
-                    ///
+                    context.fillStyle = "red";
+                    context.fillText(document.getElementById('geolocation').innerHTML, 10, 10);
                                 
                 };
                 // Show the captured photo
@@ -174,10 +149,56 @@
                 alert('Failed because: ' + message);
             }
             
+            
+            
+            ///
+            // onSuccess Callback
+            //   This method accepts a `Position` object, which contains
+            //   the current GPS coordinates
+            //
+            var GonSuccess = function(position) {
+                var element = document.getElementById('geolocation');
+                element.innerHTML = 'Latitude: '          + position.coords.latitude          + '\n' +
+                                 'Longitude: '         + position.coords.longitude         + '\n' +
+                                 'Altitude: '          + position.coords.altitude          + '\n' +
+                                 'Accuracy: '          + position.coords.accuracy          + '\n' +
+                                 'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+                                 'Heading: '           + position.coords.heading           + '\n' +
+                                 'Speed: '             + position.coords.speed             + '\n' +
+                                 'Timestamp: '         + new Date(position.timestamp)      + '\n';
+            };
+            
+            // onError Callback receives a PositionError object
+            //
+            function GonError(error) {
+                alert('code: '    + error.code    + '\n' +
+                      'message: ' + error.message + '\n');
+            }
+            
+//            navigator.geolocation.getCurrentPosition(GonSuccess, GonError);
+            var watchID = navigator.geolocation.watchPosition(GonSuccess, GonError, { frequency: 3000 });
+            ///
+
+            
+            function ConSuccess(heading) {
+                //console.log(heading);
+                var element = document.getElementById('heading');
+                element.innerHTML = 'Heading: ' + heading.magneticHeading;
+            };
+            
+            function ConError(compassError) {
+                alert('Compass error: ' + compassError.code);
+            };
+            
+            
+            var watchID2 = navigator.compass.watchHeading(ConSuccess, ConError, { frequency: 3000 });
+            
             </script>
   </head>
   <body onload="onBodyLoad()">
 	<section>
+        <div id="heading">Waiting for heading...</div>
+        <pre id="geolocation">Watching geolocation...</pre>
         
         <button onclick="capturePhoto();">Capture Photo</button> <br>
         <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
