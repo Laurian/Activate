@@ -36,6 +36,10 @@
 		108A3AAD14EFBBB8004CE7FD /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 108A3AAC14EFBBB8004CE7FD /* MainViewController.m */; };
 		108A3AAF14EFBBB8004CE7FD /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108A3AAE14EFBBB8004CE7FD /* MainViewController.xib */; };
 		108A3AB814EFBC44004CE7FD /* www in Resources */ = {isa = PBXBuildFile; fileRef = 108A3AB714EFBC44004CE7FD /* www */; };
+		108A3ABA14EFE0F9004CE7FD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 108A3AB914EFE0F9004CE7FD /* Default@2x.png */; };
+		108A3ABC14EFE155004CE7FD /* iCandle_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 108A3ABB14EFE155004CE7FD /* iCandle_114.png */; };
+		108A3ABE14EFE19B004CE7FD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 108A3ABD14EFE19B004CE7FD /* Default.png */; };
+		108A3AC014EFE1C3004CE7FD /* iCandle_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 108A3ABF14EFE1C3004CE7FD /* iCandle_57.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +78,10 @@
 		108A3AAE14EFBBB8004CE7FD /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainViewController.xib; path = Classes/MainViewController.xib; sourceTree = "<group>"; };
 		108A3AB114EFBBB8004CE7FD /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = Plugins/README; sourceTree = "<group>"; };
 		108A3AB714EFBC44004CE7FD /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
+		108A3AB914EFE0F9004CE7FD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		108A3ABB14EFE155004CE7FD /* iCandle_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iCandle_114.png; sourceTree = "<group>"; };
+		108A3ABD14EFE19B004CE7FD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		108A3ABF14EFE1C3004CE7FD /* iCandle_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iCandle_57.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +119,10 @@
 		108A3A5714EFBBB7004CE7FD = {
 			isa = PBXGroup;
 			children = (
+				108A3ABF14EFE1C3004CE7FD /* iCandle_57.png */,
+				108A3ABD14EFE19B004CE7FD /* Default.png */,
+				108A3ABB14EFE155004CE7FD /* iCandle_114.png */,
+				108A3AB914EFE0F9004CE7FD /* Default@2x.png */,
 				108A3AB714EFBC44004CE7FD /* www */,
 				108A3A8314EFBBB7004CE7FD /* Activate */,
 				108A3A6814EFBBB7004CE7FD /* Frameworks */,
@@ -303,6 +315,10 @@
 				108A3AA614EFBBB8004CE7FD /* PhoneGap.plist in Resources */,
 				108A3AAF14EFBBB8004CE7FD /* MainViewController.xib in Resources */,
 				108A3AB814EFBC44004CE7FD /* www in Resources */,
+				108A3ABA14EFE0F9004CE7FD /* Default@2x.png in Resources */,
+				108A3ABC14EFE155004CE7FD /* iCandle_114.png in Resources */,
+				108A3ABE14EFE19B004CE7FD /* Default.png in Resources */,
+				108A3AC014EFE1C3004CE7FD /* iCandle_57.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

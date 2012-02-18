@@ -9,13 +9,29 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>iCandle_57.png</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>icon.png</string>
-		<string>icon@2x.png</string>
+		<string>iCandle_57.png</string>
+		<string>iCandle_114.png</string>
 		<string>icon-72.png</string>
+		<string>Default@2x.png</string>
+		<string>Default.png</string>
 	</array>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>iCandle_57.png</string>
+				<string>iCandle_114.png</string>
+				<string>icon-72.png</string>
+				<string>Default@2x.png</string>
+				<string>Default.png</string>
+			</array>
+		</dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>org.amnesty.Activate</string>
 	<key>CFBundleInfoDictionaryVersion</key>
