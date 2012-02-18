@@ -325,7 +325,7 @@
 			<img src="image/loader.gif" style="margin:auto">
 		</div>
 		<menu style="position: absolute; bottom: 0; left: 0; width: 100%; margin: 0; padding: 0; text-align: center">
-			<button>Describe</button>
+			<button onclick="$(this).replaceWith('<textarea></textarea>');$('textarea').css({width: '95%', marginBottom: '1em'}).attr('rows', 3).trigger('focus').after('<button>Submit</button>')">Describe</button>
 			<img width="102" onclick="$('#capture').slideDown();$('#upload').slideUp();" style="margin-bottom: 0px" src="image/activate_nav_new.png">
 
 			<img src="image/activate_nav_photo.png" style="width: 100%; margin-top: 10px">
