@@ -240,6 +240,11 @@ button {
 	padding:			1em;
 }
 
+pre {
+	color:			#ffff00;
+	text-shadow:	0 0 3px black;
+}
+
 
 
 
